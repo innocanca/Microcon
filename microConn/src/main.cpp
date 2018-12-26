@@ -1,6 +1,6 @@
-#include "mainwindow.h"
-#include "loginframe.h"
-#include "home.h"
+#include "include/mainwindow.h"
+#include "include/loginframe.h"
+#include "include/home.h"
 #include <QApplication>
 #include <QLabel>
 #include <QPushButton>
@@ -11,7 +11,7 @@
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <iostream>
-#include "linkServer.h"
+#include "include/linkServer.h"
 #include <vector>
 using namespace std;
 

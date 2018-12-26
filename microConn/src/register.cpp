@@ -1,4 +1,4 @@
-#include"register.h"
+#include"include/register.h"
 #include<QHBoxLayout>
 #include<QVBoxLayout>
 Register::Register()

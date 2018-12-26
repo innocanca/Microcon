@@ -13,8 +13,8 @@ MAKEFILE      = Makefile
 CC            = gcc
 CXX           = g++
 DEFINES       = -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
-CFLAGS        = -g -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-CXXFLAGS      = -g -O2 -std=gnu++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe -O2 -std=gnu++0x -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 INCPATH       = -I. -I. -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore -I. -I. -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++
 QMAKE         = /opt/Qt5.6.0/5.6/gcc_64/bin/qmake
 DEL_FILE      = rm -f
@@ -33,10 +33,10 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = microConn1.0.0
-DISTDIR = /root/microConn/.tmp/microConn1.0.0
+DISTDIR = /root/microConn/microConn/.tmp/microConn1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1 -Wl,-z,origin -Wl,-rpath,\$$ORIGIN -Wl,-rpath,/opt/Qt5.6.0/5.6/gcc_64/lib
-LIBS          = $(SUBLIBS) -g -L/opt/Qt5.6.0/5.6/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
+LIBS          = $(SUBLIBS) -L/opt/Qt5.6.0/5.6/gcc_64/lib -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread 
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -48,17 +48,17 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = clicklabel.cpp \
-		create_groupchat.cpp \
-		data.cpp \
-		home.cpp \
-		linkServer.cpp \
-		loginframe.cpp \
-		main.cpp \
-		mainwindow.cpp \
-		register.cpp \
-		timer.cpp \
-		util.cpp moc_clicklabel.cpp \
+SOURCES       = src/clicklabel.cpp \
+		src/create_groupchat.cpp \
+		src/data.cpp \
+		src/home.cpp \
+		src/linkServer.cpp \
+		src/loginframe.cpp \
+		src/main.cpp \
+		src/mainwindow.cpp \
+		src/register.cpp \
+		src/timer.cpp \
+		src/util.cpp moc_clicklabel.cpp \
 		moc_create_groupchat.cpp \
 		moc_home.cpp \
 		moc_loginframe.cpp \
@@ -214,27 +214,28 @@ DIST          = /opt/Qt5.6.0/5.6/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt5.6.0/5.6/gcc_64/mkspecs/features/exceptions.prf \
 		/opt/Qt5.6.0/5.6/gcc_64/mkspecs/features/yacc.prf \
 		/opt/Qt5.6.0/5.6/gcc_64/mkspecs/features/lex.prf \
-		microConn.pro clicklabel.h \
-		create_groupchat.h \
-		data.h \
-		home.h \
-		linkServer.h \
-		loginframe.h \
-		mainwindow.h \
-		processEvent.h \
-		register.h \
-		timer.h \
-		util.h clicklabel.cpp \
-		create_groupchat.cpp \
-		data.cpp \
-		home.cpp \
-		linkServer.cpp \
-		loginframe.cpp \
-		main.cpp \
-		mainwindow.cpp \
-		register.cpp \
-		timer.cpp \
-		util.cpp
+		microConn.pro include/clicklabel.h \
+		include/create_groupchat.h \
+		include/data.h \
+		include/home.h \
+		include/linkServer.h \
+		include/loginframe.h \
+		include/mainwindow.h \
+		include/processEvent.h \
+		include/register.h \
+		include/timer.h \
+		include/ui_mainwindow.h \
+		include/util.h src/clicklabel.cpp \
+		src/create_groupchat.cpp \
+		src/data.cpp \
+		src/home.cpp \
+		src/linkServer.cpp \
+		src/loginframe.cpp \
+		src/main.cpp \
+		src/mainwindow.cpp \
+		src/register.cpp \
+		src/timer.cpp \
+		src/util.cpp
 QMAKE_TARGET  = microConn
 DESTDIR       = 
 TARGET        = microConn
@@ -535,8 +536,8 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
-	$(COPY_FILE) --parents clicklabel.h create_groupchat.h data.h home.h linkServer.h loginframe.h mainwindow.h processEvent.h register.h timer.h util.h $(DISTDIR)/
-	$(COPY_FILE) --parents clicklabel.cpp create_groupchat.cpp data.cpp home.cpp linkServer.cpp loginframe.cpp main.cpp mainwindow.cpp register.cpp timer.cpp util.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents include/clicklabel.h include/create_groupchat.h include/data.h include/home.h include/linkServer.h include/loginframe.h include/mainwindow.h include/processEvent.h include/register.h include/timer.h include/ui_mainwindow.h include/util.h $(DISTDIR)/
+	$(COPY_FILE) --parents src/clicklabel.cpp src/create_groupchat.cpp src/data.cpp src/home.cpp src/linkServer.cpp src/loginframe.cpp src/main.cpp src/mainwindow.cpp src/register.cpp src/timer.cpp src/util.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents mainwindow.ui $(DISTDIR)/
 
 
@@ -671,10 +672,10 @@ moc_clicklabel.cpp: /opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent \
-		clicklabel.h
-	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn -I/root/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore clicklabel.h -o moc_clicklabel.cpp
+		include/clicklabel.h
+	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn/microConn -I/root/microConn/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore include/clicklabel.h -o moc_clicklabel.cpp
 
-moc_create_groupchat.cpp: mainwindow.h \
+moc_create_groupchat.cpp: include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -988,10 +989,10 @@ moc_create_groupchat.cpp: mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qdesktopservices.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtguiversion.h \
-		create_groupchat.h
-	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn -I/root/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore create_groupchat.h -o moc_create_groupchat.cpp
+		include/create_groupchat.h
+	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn/microConn -I/root/microConn/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore include/create_groupchat.h -o moc_create_groupchat.cpp
 
-moc_home.cpp: mainwindow.h \
+moc_home.cpp: include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -1099,7 +1100,7 @@ moc_home.cpp: mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		clicklabel.h \
+		include/clicklabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
@@ -1148,10 +1149,10 @@ moc_home.cpp: mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTextEdit \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextdocument.h \
-		home.h
-	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn -I/root/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore home.h -o moc_home.cpp
+		include/home.h
+	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn/microConn -I/root/microConn/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore include/home.h -o moc_home.cpp
 
-moc_loginframe.cpp: mainwindow.h \
+moc_loginframe.cpp: include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -1289,8 +1290,8 @@ moc_loginframe.cpp: mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		loginframe.h
-	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn -I/root/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore loginframe.h -o moc_loginframe.cpp
+		include/loginframe.h
+	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn/microConn -I/root/microConn/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore include/loginframe.h -o moc_loginframe.cpp
 
 moc_mainwindow.cpp: /opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
@@ -1399,8 +1400,8 @@ moc_mainwindow.cpp: /opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		mainwindow.h
-	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn -I/root/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore mainwindow.h -o moc_mainwindow.cpp
+		include/mainwindow.h
+	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn/microConn -I/root/microConn/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore include/mainwindow.h -o moc_mainwindow.cpp
 
 moc_register.cpp: /opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGui \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGuiDepends \
@@ -1723,8 +1724,8 @@ moc_register.cpp: /opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGui \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
-		register.h
-	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn -I/root/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore register.h -o moc_register.cpp
+		include/register.h
+	/opt/Qt5.6.0/5.6/gcc_64/bin/moc $(DEFINES) -I/opt/Qt5.6.0/5.6/gcc_64/mkspecs/linux-g++ -I/root/microConn/microConn -I/root/microConn/microConn -I/opt/Qt5.6.0/5.6/gcc_64/include -I/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets -I/opt/Qt5.6.0/5.6/gcc_64/include/QtGui -I/opt/Qt5.6.0/5.6/gcc_64/include/QtCore include/register.h -o moc_register.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -1744,7 +1745,7 @@ compiler_clean: compiler_moc_header_clean compiler_uic_clean
 
 ####### Compile
 
-clicklabel.o: clicklabel.cpp clicklabel.h \
+clicklabel.o: src/clicklabel.cpp include/clicklabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
@@ -1853,10 +1854,10 @@ clicklabel.o: clicklabel.cpp clicklabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clicklabel.o clicklabel.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o clicklabel.o src/clicklabel.cpp
 
-create_groupchat.o: create_groupchat.cpp create_groupchat.h \
-		mainwindow.h \
+create_groupchat.o: src/create_groupchat.cpp include/create_groupchat.h \
+		include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -2170,13 +2171,13 @@ create_groupchat.o: create_groupchat.cpp create_groupchat.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qdesktopservices.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtguiversion.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o create_groupchat.o create_groupchat.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o create_groupchat.o src/create_groupchat.cpp
 
-data.o: data.cpp data.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o data.o data.cpp
+data.o: src/data.cpp include/data.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o data.o src/data.cpp
 
-home.o: home.cpp home.h \
-		mainwindow.h \
+home.o: src/home.cpp include/home.h \
+		include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -2284,7 +2285,7 @@ home.o: home.cpp home.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		clicklabel.h \
+		include/clicklabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QLabel \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
@@ -2336,9 +2337,9 @@ home.o: home.cpp home.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMessageBox \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmessagebox.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdialog.h \
-		linkServer.h \
-		data.h \
-		timer.h \
+		include/linkServer.h \
+		include/data.h \
+		include/timer.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGui \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGuiDepends \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QtCore \
@@ -2537,13 +2538,13 @@ home.o: home.cpp home.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qsplitter.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QFileDialog \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qfiledialog.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o home.o home.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o home.o src/home.cpp
 
-linkServer.o: linkServer.cpp linkServer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o linkServer.o linkServer.cpp
+linkServer.o: src/linkServer.cpp include/linkServer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o linkServer.o src/linkServer.cpp
 
-loginframe.o: loginframe.cpp loginframe.h \
-		mainwindow.h \
+loginframe.o: src/loginframe.cpp include/loginframe.h \
+		include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -2681,8 +2682,7 @@ loginframe.o: loginframe.cpp loginframe.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		util.h \
-		data.h \
+		include/register.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGui \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGuiDepends \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QtCore \
@@ -2879,8 +2879,10 @@ loginframe.o: loginframe.cpp loginframe.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtexttable.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qdesktopservices.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtguiversion.h \
-		home.h \
-		clicklabel.h \
+		include/util.h \
+		include/data.h \
+		include/home.h \
+		include/clicklabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QListWidget \
@@ -2897,10 +2899,10 @@ loginframe.o: loginframe.cpp loginframe.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTextEdit \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextedit.h \
-		linkServer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginframe.o loginframe.cpp
+		include/linkServer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loginframe.o src/loginframe.cpp
 
-main.o: main.cpp mainwindow.h \
+main.o: src/main.cpp include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -3008,7 +3010,7 @@ main.o: main.cpp mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		loginframe.h \
+		include/loginframe.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
@@ -3039,8 +3041,8 @@ main.o: main.cpp mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextformat.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qpen.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextoption.h \
-		home.h \
-		clicklabel.h \
+		include/home.h \
+		include/clicklabel.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QString \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QMouseEvent \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QListWidget \
@@ -3060,10 +3062,10 @@ main.o: main.cpp mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QTextEdit \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtextedit.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtextdocument.h \
-		linkServer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+		include/linkServer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o src/main.cpp
 
-mainwindow.o: mainwindow.cpp mainwindow.h \
+mainwindow.o: src/mainwindow.cpp include/mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qwidget.h \
@@ -3171,10 +3173,53 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qtouchdevice.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qicon.h \
-		ui_mainwindow.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
+		include/ui_mainwindow.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QVariant \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QAction \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qaction.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qactiongroup.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QApplication \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qapplication.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/qcoreapplication.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/qeventloop.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qguiapplication.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qinputmethod.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QButtonGroup \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qbuttongroup.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHeaderView \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qheaderview.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemview.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractscrollarea.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qframe.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/qabstractitemmodel.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/qitemselectionmodel.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractitemdelegate.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyleoption.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractspinbox.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/qvalidator.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/qregularexpression.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qslider.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qabstractslider.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstyle.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabbar.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qrubberband.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMenuBar \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmenubar.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmenu.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QStatusBar \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qstatusbar.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QToolBar \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtoolbar.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QVBoxLayout \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QWidget
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o src/mainwindow.cpp
 
-register.o: register.cpp register.h \
+register.o: src/register.cpp include/register.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGui \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtGui/QtGuiDepends \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtCore/QtCore \
@@ -3495,14 +3540,20 @@ register.o: register.cpp register.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlineedit.h \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QMainWindow \
 		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qmainwindow.h \
-		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o register.o register.cpp
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qtabwidget.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QHBoxLayout \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qboxlayout.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayout.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qlayoutitem.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/qgridlayout.h \
+		/opt/Qt5.6.0/5.6/gcc_64/include/QtWidgets/QVBoxLayout
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o register.o src/register.cpp
 
-timer.o: timer.cpp timer.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o timer.cpp
+timer.o: src/timer.cpp include/timer.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o timer.o src/timer.cpp
 
-util.o: util.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o util.o util.cpp
+util.o: src/util.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o util.o src/util.cpp
 
 moc_clicklabel.o: moc_clicklabel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_clicklabel.o moc_clicklabel.cpp

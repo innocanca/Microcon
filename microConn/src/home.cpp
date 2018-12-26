@@ -1,12 +1,12 @@
-#include "home.h"
+#include "include/home.h"
 #include <QMessageBox>
-#include "linkServer.h"
-#include "data.h"
-#include "timer.h"
+#include "include/linkServer.h"
+#include "include/data.h"
+#include "include/timer.h"
 #include <sys/socket.h>
 #include <arpa/inet.h>
 #include <unistd.h>
-#include "mainwindow.h"
+#include "include/mainwindow.h"
 #include <QLabel>
 #include <algorithm>
 #include <QtGui>

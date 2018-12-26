@@ -2,7 +2,7 @@
 #include<unistd.h>
 #include<arpa/inet.h>
 #include<string.h>
-#include"linkServer.h"
+#include"include/linkServer.h"
 void linkServer::TcpConnect(){
 	struct sockaddr_in servaddr;
         sockfd=socket(AF_INET,SOCK_STREAM,0);

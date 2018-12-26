@@ -1,18 +1,18 @@
-#include "loginframe.h"
-#include "register.h"
-#include "util.h"
-#include "data.h"
+#include "include/loginframe.h"
+#include "include/register.h"
+#include "include/util.h"
+#include "include/data.h"
 #include <sys/socket.h>
 #include <pthread.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <QtGui>
-#include "mainwindow.h"
-#include "home.h"
+#include "include/mainwindow.h"
+#include "include/home.h"
 #include <QApplication>
 #include <iostream>
 #include <QMainWindow>
-#include "linkServer.h"
+#include "include/linkServer.h"
 using namespace std;
 
 LoginFrame::LoginFrame()
