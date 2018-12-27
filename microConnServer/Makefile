@@ -1,10 +1,9 @@
 CXX = g++ -std=c++11 -w -g `mysql_config --cflags --libs`
 CPPFLAGS = -I include
-TARGET := server
-SRCDIRS := src
-OUTDIRS := bin
-SRCEXTS := .cpp
-SOURCES := $(wildcard $(SRCDIRS)/*.cpp)
+TARGET = server
+SRCDIRS = src
+OUTDIRS = bin/
+SOURCES =$(wildcard $(SRCDIRS)/*.cpp)
 OBJS =	$(patsubst %.cpp,%.o,$(SOURCES))
 %.o : $(SRCDIRS)/%.cpp
 	$(CXX) $(CPPFLAGS) -c -o $@   $< 
