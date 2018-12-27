@@ -6,7 +6,7 @@
 #include<string>
 #include<sys/socket.h>
 #include<arpa/inet.h>
-#include"data.h"
+#include"include/data.h"
 
 using namespace std;
 
