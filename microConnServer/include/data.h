@@ -1,3 +1,5 @@
+#ifndef _DATA_H
+#define _DATA_H
 #include<map>
 #include<string>
 #include<list>
@@ -37,3 +39,4 @@ extern std::map<std::string , std::vector<std::string> >friend_online;
 extern std::map<string,int> fd_mp;
 //记录在线用户
 extern std::vector<string> user_online;
+#endif

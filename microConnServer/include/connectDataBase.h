@@ -1,3 +1,5 @@
+#ifndef _CONNECT_DATA_BASE_H
+#define _CONNECT_DATA_BASE_H
 #include<mysql.h>
 #include<string>
 using namespace std;
@@ -19,3 +21,4 @@ private:
 	MYSQL conn;
 	
 };
+#endif

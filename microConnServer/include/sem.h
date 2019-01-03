@@ -1,3 +1,5 @@
+#ifndef _SEM_H
+#define _SEM_H
 #include<semaphore.h>
 #include<iostream>
 using namespace std;
@@ -29,3 +31,4 @@ private:
 	sem_t m_sem;
 
 };
+#endif

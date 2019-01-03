@@ -1,3 +1,5 @@
+#ifndef _PROCESSEVENT_H
+#define _PROCESSEVENT_H
 class processEvent{
 public:
 	processEvent();
@@ -11,3 +13,4 @@ private:
 
 	
 };
+#endif

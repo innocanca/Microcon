@@ -1,3 +1,5 @@
+#ifndef _UDP_H
+#define _UDP_H
 #include<sys/socket.h>
 #include<netinet/in.h>
 #include<unistd.h>
@@ -14,3 +16,4 @@ private:
 	struct sockaddr_in servaddr,cliaddr;
 
 };
+#endif

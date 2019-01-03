@@ -1,3 +1,5 @@
+#ifndef _TIMER_H
+#define _TIMER_H
 #include<time.h>
 class Timer{
 public:
@@ -9,3 +11,4 @@ private:
 	char timebuf[32];
 
 };
+#endif

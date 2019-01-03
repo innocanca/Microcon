@@ -1,3 +1,5 @@
+#ifndef _LOCK_H
+#define _LOCK_H
 #include<pthread.h>
 class Lock{
 public:
@@ -9,3 +11,4 @@ public:
 private:
 	pthread_mutex_t mutex;
 };
+#endif
