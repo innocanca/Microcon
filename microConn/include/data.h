@@ -1,3 +1,5 @@
+#ifndef _DATA_H
+#define _DATA_H
 #include<vector>
 #include<string>
 #include<map>
@@ -18,3 +20,4 @@ extern map<string,string> message;
 extern map<string,vector<string> >recvbuffer;
 //消息类型
 extern map<string,vector<string> > mesgtype;
+#endif

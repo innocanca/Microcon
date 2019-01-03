@@ -1,3 +1,5 @@
+#ifndef _LINK_SERVER_H
+#define _LINK_SERVER_H
 #include<sys/socket.h>
 #include<unistd.h>
 #include<arpa/inet.h>
@@ -16,3 +18,4 @@ private:
 	int usockfd;
 	struct sockaddr_in servaddr;
 };
+#endif
